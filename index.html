@@ -1,0 +1,1002 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Scarlett House Bombay</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Josefin+Sans:wght@200;300;400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --scarlet: #C0392B;
+    --deep-scarlet: #7B1D1D;
+    --gold: #C9A84C;
+    --cream: #FAF3E0;
+    --dark: #1A0A0A;
+    --charcoal: #2C1A1A;
+    --blush: #F2D6C8;
+    --muted: #8C6B6B;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--dark);
+    color: var(--cream);
+    font-family: 'Cormorant Garamond', serif;
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0.9rem 3rem;
+    background: rgba(26,10,10,0.95);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(201,168,76,0.2);
+    transition: padding 0.3s;
+  }
+  .nav-logo-wrap {
+    display: flex; align-items: center; gap: 0.8rem; text-decoration: none;
+  }
+  .nav-logo-img {
+    width: 46px; height: 46px; border-radius: 50%;
+    object-fit: cover; border: 1.5px solid rgba(201,168,76,0.4);
+    flex-shrink: 0;
+  }
+  .nav-logo-text {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem; font-weight: 700; letter-spacing: 0.1em;
+    color: var(--gold); text-transform: uppercase; line-height: 1.1;
+  }
+  .nav-logo-text span { color: var(--scarlet); }
+  .nav-logo-sub {
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 0.55rem; letter-spacing: 0.3em;
+    text-transform: uppercase; color: var(--muted); display: block;
+  }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    font-family: 'Josefin Sans', sans-serif; font-size: 0.68rem;
+    letter-spacing: 0.2em; text-transform: uppercase; color: var(--cream);
+    text-decoration: none; transition: color 0.3s;
+  }
+  .nav-links a:hover { color: var(--gold); }
+  .nav-reserve {
+    font-family: 'Josefin Sans', sans-serif; font-size: 0.65rem;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    padding: 0.55rem 1.4rem; border: 1px solid var(--gold);
+    color: var(--gold); background: transparent; cursor: pointer;
+    transition: all 0.3s; text-decoration: none; white-space: nowrap;
+  }
+  .nav-reserve:hover { background: var(--gold); color: var(--dark); }
+  .nav-hamburger {
+    display: none; flex-direction: column; gap: 5px; cursor: pointer;
+    padding: 4px; background: none; border: none;
+  }
+  .nav-hamburger span {
+    display: block; width: 22px; height: 2px;
+    background: var(--cream); transition: all 0.3s;
+  }
+  .nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .nav-hamburger.open span:nth-child(2) { opacity: 0; }
+  .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+  .mobile-menu {
+    display: none; position: fixed; top: 65px; left: 0; right: 0;
+    background: rgba(26,10,10,0.98); backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(201,168,76,0.2);
+    padding: 1.5rem 2rem; z-index: 99;
+    flex-direction: column; gap: 1rem;
+  }
+  .mobile-menu.open { display: flex; }
+  .mobile-menu a {
+    font-family: 'Josefin Sans', sans-serif; font-size: 0.75rem;
+    letter-spacing: 0.25em; text-transform: uppercase; color: var(--cream);
+    text-decoration: none; padding: 0.6rem 0;
+    border-bottom: 1px solid rgba(201,168,76,0.1);
+  }
+  .mobile-menu a:hover { color: var(--gold); }
+  .mobile-menu .mob-reserve {
+    margin-top: 0.5rem; text-align: center; padding: 0.8rem;
+    border: 1px solid var(--gold); color: var(--gold);
+    font-family: 'Josefin Sans', sans-serif; font-size: 0.7rem;
+    letter-spacing: 0.2em; text-transform: uppercase; text-decoration: none;
+    transition: all 0.3s;
+  }
+  .mobile-menu .mob-reserve:hover { background: var(--gold); color: var(--dark); }
+
+  /* ── HERO ── */
+  #hero {
+    min-height: 100vh; position: relative;
+    display: flex; align-items: center; justify-content: center; overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse at 70% 40%, rgba(192,57,43,0.18) 0%, transparent 60%),
+      radial-gradient(ellipse at 20% 80%, rgba(201,168,76,0.1) 0%, transparent 50%),
+      linear-gradient(160deg, #1A0A0A 0%, #2C1A1A 50%, #1A0A0A 100%);
+  }
+  .hero-noise {
+    position: absolute; inset: 0; opacity: 0.035;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  }
+  .hero-line {
+    position: absolute; top: 0; left: 50%; width: 1px; height: 100%;
+    background: linear-gradient(to bottom, transparent, rgba(201,168,76,0.2), transparent);
+  }
+  .hero-content {
+    position: relative; text-align: center; padding: 2rem 1.5rem;
+    animation: heroFade 1.4s ease forwards;
+  }
+  @keyframes heroFade {
+    from { opacity: 0; transform: translateY(30px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .hero-logo {
+    width: 140px; height: 140px; border-radius: 50%;
+    object-fit: cover; margin: 0 auto 2rem;
+    border: 2px solid rgba(201,168,76,0.4);
+    box-shadow: 0 0 40px rgba(192,57,43,0.2), 0 0 0 6px rgba(201,168,76,0.08);
+    display: block; animation: heroFade 1s ease both;
+  }
+  .hero-eyebrow {
+    font-family: 'Josefin Sans', sans-serif; font-size: 0.65rem;
+    letter-spacing: 0.45em; text-transform: uppercase; color: var(--gold);
+    margin-bottom: 1.2rem; opacity: 0.85;
+  }
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3rem, 8vw, 7.5rem);
+    font-weight: 900; line-height: 0.92; color: var(--cream);
+  }
+  .hero-title em { color: var(--scarlet); font-style: italic; }
+  .hero-subtitle {
+    font-family: 'Cormorant Garamond', serif; font-size: 1.2rem;
+    font-weight: 300; font-style: italic; color: var(--blush);
+    margin-top: 1.4rem; letter-spacing: 0.05em;
+  }
+  .hero-divider { width: 50px; height: 1px; background: var(--gold); margin: 1.8rem auto; }
+  .hero-tagline {
+    font-family: 'Josefin Sans', sans-serif; font-size: 0.68rem;
+    letter-spacing: 0.3em; text-transform: uppercase; color: var(--muted);
+  }
+  .hero-cta {
+    margin-top: 2.5rem; display: flex; gap: 1rem;
+    justify-content: center; flex-wrap: wrap;
+  }
+  .btn-primary {
+    font-family: 'Josefin Sans', sans-serif; font-size: 0.7rem;
+    letter-spacing: 0.25em; text-transform: uppercase;
+    padding: 0.9rem 2.2rem; background: var(--scarlet); color: var(--cream);
+    border: none; cursor: pointer; transition: all 0.3s; text-decoration: none;
+    display: inline-block;
+  }
+  .btn-primary:hover { background: var(--deep-scarlet); transform: translateY(-2px); }
+  .btn-outline {
+    font-family: 'Josefin Sans', sans-serif; font-size: 0.7rem;
+    letter-spacing: 0.25em; text-transform: uppercase;
+    padding: 0.9rem 2.2rem; background: transparent; color: var(--cream);
+    border: 1px solid rgba(250,243,224,0.35); cursor: pointer; transition: all 0.3s;
+    text-decoration: none; display: inline-block;
+  }
+  .btn-outline:hover { border-color: var(--gold); color: var(--gold); }
+  .hero-scroll {
+    position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%);
+    text-align: center; animation: bounce 2.5s ease-in-out infinite;
+  }
+  .hero-scroll span {
+    font-family: 'Josefin Sans', sans-serif; font-size: 0.58rem;
+    letter-spacing: 0.3em; text-transform: uppercase; color: var(--muted);
+    display: block; margin-bottom: 0.4rem;
+  }
+  .scroll-arrow { color: var(--gold); font-size: 1rem; }
+  @keyframes bounce {
+    0%,100% { transform: translateX(-50%) translateY(0); }
+    50%      { transform: translateX(-50%) translateY(7px); }
+  }
+
+  /* ── SECTION BASE ── */
+  section { padding: 6rem 4rem; }
+  .section-label {
+    font-family: 'Josefin Sans', sans-serif; font-size: 0.62rem;
+    letter-spacing: 0.45em; text-transform: uppercase; color: var(--gold);
+    margin-bottom: 0.7rem;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.9rem, 3.5vw, 3rem);
+    font-weight: 700; line-height: 1.1; color: var(--cream);
+  }
+  .section-title em { color: var(--scarlet); font-style: italic; }
+
+  /* ── ABOUT ── */
+  #about {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 5rem;
+    align-items: center; max-width: 1200px; margin: 0 auto;
+    padding: 6rem 0;
+  }
+  .about-section-wrap { padding: 0 4rem; }
+  .about-visual { position: relative; }
+  .about-img-frame {
+    width: 100%; aspect-ratio: 4/5;
+    background: linear-gradient(135deg, var(--charcoal) 0%, #3A1A1A 100%);
+    position: relative; overflow: hidden;
+    border: 1px solid rgba(201,168,76,0.2);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .about-img-frame::after {
+    content: '';
+    position: absolute; inset: 12px;
+    border: 1px solid rgba(201,168,76,0.12);
+    pointer-events: none;
+  }
+  .about-logo-large {
+    width: 75%; height: 75%; object-fit: contain;
+    opacity: 0.85;
+  }
+  .about-badge {
+    position: absolute; bottom: -1.5rem; right: -1.5rem;
+    width: 105px; height: 105px; border-radius: 50%;
+    background: var(--scarlet); display: flex; flex-direction: column;
+    align-items: center; justify-content: center; text-align: center;
+    border: 3px solid var(--dark);
+  }
+  .about-badge .num {
+    font-family: 'Playfair Display', serif; font-size: 1.7rem; font-weight: 900;
+    color: var(--cream); line-height: 1;
+  }
+  .about-badge .lbl {
+    font-family: 'Josefin Sans', sans-serif; font-size: 0.48rem;
+    letter-spacing: 0.12em; text-transform: uppercase; color: rgba(250,243,224,0.8);
+  }
+  .about-body {
+    font-size: 1.1rem; line-height: 1.9; color: rgba(250,243,224,0.8);
+    margin-top: 1.8rem; font-weight: 300;
+  }
+  .about-body p + p { margin-top: 1.1rem; }
+  .about-features {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 0.9rem; margin-top: 2.2rem;
+  }
+  .feat-item {
+    padding: 1rem 1.2rem; border: 1px solid rgba(201,168,76,0.15);
+    background: rgba(44,26,26,0.5); display: flex; align-items: center; gap: 0.8rem;
+  }
+  .feat-icon { font-size: 0; flex-shrink: 0; }
+  .feat-icon svg { width: 22px; height: 22px; }
+  .feat-name {
+    font-family: 'Josefin Sans', sans-serif; font-size: 0.65rem;
+    letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold);
+  }
+
+  /* ── MENU ── */
+  #menu { background: var(--charcoal); text-align: center; }
+  .menu-header { margin-bottom: 3.5rem; }
+  .menu-tabs {
+    display: flex; gap: 0; justify-content: center; margin-bottom: 3rem;
+    border: 1px solid rgba(201,168,76,0.25); width: fit-content; margin: 0 auto 3rem;
+    flex-wrap: wrap;
+  }
+  .menu-tab {
+    font-family: 'Josefin Sans', sans-serif; font-size: 0.65rem;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    padding: 0.75rem 1.8rem; cursor: pointer;
+    background: transparent; border: none; color: var(--muted);
+    transition: all 0.3s; border-right: 1px solid rgba(201,168,76,0.25);
+  }
+  .menu-tab:last-child { border-right: none; }
+  .menu-tab.active { background: var(--scarlet); color: var(--cream); }
+  .menu-tab:hover:not(.active) { color: var(--gold); }
+  .menu-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1.5px; max-width: 1100px; margin: 0 auto;
+  }
+  .menu-card {
+    background: rgba(26,10,10,0.7); padding: 1.8rem;
+    border: 1px solid rgba(201,168,76,0.1); text-align: left;
+    transition: border-color 0.3s;
+  }
+  .menu-card:hover { border-color: rgba(201,168,76,0.35); }
+  .menu-card-top {
+    display: flex; justify-content: space-between; align-items: flex-start;
+    margin-bottom: 0.5rem;
+  }
+  .menu-item-name {
+    font-family: 'Playfair Display', serif; font-size: 1.1rem;
+    font-weight: 600; color: var(--cream); flex: 1; padding-right: 0.8rem;
+  }
+  .menu-price {
+    font-family: 'Josefin Sans', sans-serif; font-size: 0.8rem;
+    color: var(--gold); white-space: nowrap;
+  }
+  .menu-desc { font-size: 0.9rem; color: var(--muted); line-height: 1.6; font-style: italic; }
+  .menu-tag {
+    display: inline-block; margin-top: 0.7rem;
+    font-family: 'Josefin Sans', sans-serif; font-size: 0.52rem;
+    letter-spacing: 0.2em; text-transform: uppercase; padding: 0.18rem 0.55rem;
+    background: rgba(192,57,43,0.18); color: var(--scarlet); border: 1px solid rgba(192,57,43,0.3);
+  }
+  [data-tab]:not([data-tab="food"]) { display: none; }
+  [data-tab="food"] { display: block; }
+
+  /* ── SOCIAL PROOF STRIP ── */
+  .social-strip {
+    background: var(--deep-scarlet); padding: 1.5rem 4rem;
+    display: flex; align-items: center; justify-content: center;
+    gap: 3rem; flex-wrap: wrap;
+  }
+  .strip-item {
+    display: flex; align-items: center; gap: 0.8rem;
+    font-family: 'Josefin Sans', sans-serif; font-size: 0.65rem;
+    letter-spacing: 0.2em; text-transform: uppercase; color: rgba(250,243,224,0.8);
+  }
+  .strip-item svg { width: 18px; height: 18px; opacity: 0.85; }
+  .strip-item strong { color: var(--cream); font-weight: 400; }
+
+  /* ── RED ROOM ── */
+  #redroom {
+    background: linear-gradient(135deg, var(--deep-scarlet) 0%, #4A0E0E 50%, #1A0A0A 100%);
+    text-align: center; position: relative; overflow: hidden;
+  }
+  #redroom::before {
+    content: 'RED ROOM'; font-family: 'Playfair Display', serif;
+    font-size: 18vw; font-weight: 900; opacity: 0.04;
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+    white-space: nowrap; color: var(--cream); pointer-events: none;
+  }
+  .redroom-content { position: relative; max-width: 680px; margin: 0 auto; }
+  .redroom-content .section-title { font-size: clamp(2.2rem, 4.5vw, 3.5rem); }
+  .redroom-body {
+    font-size: 1.15rem; line-height: 1.9; color: rgba(250,243,224,0.8);
+    margin: 1.8rem 0; font-weight: 300; font-style: italic;
+  }
+  .redroom-features {
+    display: flex; gap: 2.5rem; justify-content: center; margin: 2.5rem 0; flex-wrap: wrap;
+  }
+  .rf-item { text-align: center; }
+  .rf-num {
+    font-family: 'Playfair Display', serif; font-size: 2.6rem; font-weight: 900;
+    color: var(--gold); line-height: 1;
+  }
+  .rf-lbl {
+    font-family: 'Josefin Sans', sans-serif; font-size: 0.6rem;
+    letter-spacing: 0.25em; text-transform: uppercase; color: rgba(250,243,224,0.6);
+    margin-top: 0.25rem;
+  }
+
+  /* ── GALLERY ── */
+  #gallery { padding: 6rem 2rem; text-align: center; background: var(--dark); }
+  .gallery-header { margin-bottom: 2.5rem; }
+  .gallery-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: 260px 260px;
+    gap: 4px; max-width: 1100px; margin: 0 auto;
+  }
+  .gallery-item {
+    background: var(--charcoal); overflow: hidden; position: relative;
+    cursor: pointer; border: 1px solid rgba(201,168,76,0.08);
+  }
+  .gallery-item:first-child { grid-row: 1/3; }
+  .gallery-inner {
+    width: 100%; height: 100%;
+    display: flex; align-items: center; justify-content: center;
+    position: relative; transition: transform 0.5s;
+  }
+  .gallery-item:hover .gallery-inner { transform: scale(1.04); }
+  .gallery-emoji { font-size: 3.5rem; opacity: 0.5; }
+  .gallery-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(26,10,10,0.9) 0%, transparent 60%);
+    opacity: 0; transition: opacity 0.3s;
+    display: flex; align-items: flex-end; padding: 1.2rem;
+  }
+  .gallery-item:hover .gallery-overlay { opacity: 1; }
+  .gallery-cap {
+    font-family: 'Cormorant Garamond', serif; font-size: 0.95rem;
+    font-style: italic; color: var(--cream);
+  }
+
+  /* ── LOCATIONS ── */
+  .loc-section { padding: 0; }
+  .loc-header { padding: 6rem 4rem 3rem; text-align: center; }
+  #locations {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 0;
+    max-width: 1200px; margin: 0 auto; padding: 0 4rem 6rem;
+  }
+  .loc-card {
+    padding: 3.5rem; border: 1px solid rgba(201,168,76,0.1);
+    position: relative; transition: background 0.4s;
+  }
+  .loc-card:hover { background: rgba(44,26,26,0.6); }
+  .loc-number {
+    font-family: 'Playfair Display', serif; font-size: 4.5rem; font-weight: 900;
+    color: rgba(192,57,43,0.12); position: absolute; top: 1.5rem; right: 2rem; line-height: 1;
+  }
+  .loc-area {
+    font-family: 'Playfair Display', serif; font-size: 1.7rem;
+    font-weight: 700; color: var(--cream); margin-bottom: 0.4rem;
+  }
+  .loc-phone {
+    display: flex; align-items: center; gap: 0.5rem;
+    font-family: 'Josefin Sans', sans-serif; font-size: 1rem;
+    color: var(--gold); letter-spacing: 0.08em; margin: 0.9rem 0;
+    text-decoration: none;
+  }
+  .loc-phone svg { width: 15px; height: 15px; }
+  .loc-address { font-size: 0.98rem; color: var(--muted); line-height: 1.7; font-style: italic; }
+  .loc-hours { margin-top: 1.4rem; padding-top: 1.4rem; border-top: 1px solid rgba(201,168,76,0.15); }
+  .loc-hours-label {
+    font-family: 'Josefin Sans', sans-serif; font-size: 0.58rem;
+    letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.4rem;
+  }
+  .loc-hours-time { display: flex; align-items: center; gap: 0.5rem; font-size: 0.95rem; color: rgba(250,243,224,0.7); }
+  .loc-hours-time svg { width: 14px; height: 14px; opacity: 0.6; }
+  .loc-map-link {
+    display: inline-flex; align-items: center; gap: 0.4rem; margin-top: 1.2rem;
+    font-family: 'Josefin Sans', sans-serif; font-size: 0.6rem;
+    letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold);
+    text-decoration: none; transition: opacity 0.2s;
+  }
+  .loc-map-link:hover { opacity: 0.7; }
+  .loc-map-link svg { width: 12px; height: 12px; }
+
+  /* ── RESERVE ── */
+  #reserve { background: var(--charcoal); text-align: center; }
+  .reserve-inner { max-width: 660px; margin: 0 auto; }
+  .reserve-body {
+    font-size: 1.1rem; color: rgba(250,243,224,0.7); margin: 1.4rem 0 2.5rem;
+    font-style: italic; line-height: 1.8;
+  }
+  .reserve-form {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; text-align: left;
+  }
+  .form-group { display: flex; flex-direction: column; gap: 0.35rem; }
+  .form-group.full { grid-column: 1/-1; }
+  .form-group label {
+    font-family: 'Josefin Sans', sans-serif; font-size: 0.58rem;
+    letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold);
+  }
+  .form-group input, .form-group select, .form-group textarea {
+    background: rgba(26,10,10,0.8); border: 1px solid rgba(201,168,76,0.2);
+    color: var(--cream); padding: 0.8rem 1rem;
+    font-family: 'Cormorant Garamond', serif; font-size: 1rem;
+    outline: none; transition: border-color 0.3s; -webkit-appearance: none;
+    border-radius: 0;
+  }
+  .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+    border-color: var(--gold);
+  }
+  .form-group select option { background: var(--dark); }
+  .form-group textarea { resize: vertical; min-height: 90px; }
+  .form-submit { grid-column: 1/-1; margin-top: 0.3rem; }
+  .form-submit button {
+    width: 100%; padding: 1rem;
+    font-family: 'Josefin Sans', sans-serif; font-size: 0.7rem;
+    letter-spacing: 0.3em; text-transform: uppercase;
+    background: var(--scarlet); color: var(--cream); border: none;
+    cursor: pointer; transition: background 0.3s;
+  }
+  .form-submit button:hover { background: var(--deep-scarlet); }
+
+  /* ── INSTAGRAM CTA ── */
+  .insta-cta {
+    background: var(--dark); padding: 4rem 2rem; text-align: center;
+    border-top: 1px solid rgba(201,168,76,0.1);
+    border-bottom: 1px solid rgba(201,168,76,0.1);
+  }
+  .insta-cta p {
+    font-family: 'Cormorant Garamond', serif; font-size: 1.15rem;
+    font-style: italic; color: rgba(250,243,224,0.7); margin-bottom: 1.2rem;
+  }
+  .insta-btn {
+    display: inline-flex; align-items: center; gap: 0.6rem;
+    font-family: 'Josefin Sans', sans-serif; font-size: 0.68rem;
+    letter-spacing: 0.22em; text-transform: uppercase;
+    padding: 0.8rem 2rem; border: 1px solid rgba(201,168,76,0.4);
+    color: var(--gold); text-decoration: none; transition: all 0.3s;
+  }
+  .insta-btn:hover { background: rgba(201,168,76,0.08); }
+  .insta-btn svg { width: 16px; height: 16px; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: #0D0404; padding: 4.5rem 4rem 2.5rem;
+    border-top: 1px solid rgba(201,168,76,0.12);
+  }
+  .footer-grid {
+    display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 3.5rem; max-width: 1200px; margin: 0 auto;
+  }
+  .footer-brand-logo {
+    width: 55px; height: 55px; border-radius: 50%;
+    object-fit: cover; border: 1px solid rgba(201,168,76,0.25); margin-bottom: 1rem;
+  }
+  .footer-brand-name {
+    font-family: 'Playfair Display', serif; font-size: 1.15rem;
+    font-weight: 700; letter-spacing: 0.08em; color: var(--gold);
+    text-transform: uppercase; display: block; margin-bottom: 0.2rem;
+  }
+  .footer-brand-name span { color: var(--scarlet); }
+  .footer-brand p {
+    font-size: 0.92rem; color: var(--muted); line-height: 1.8;
+    font-style: italic; margin-top: 0.8rem;
+  }
+  .footer-social { display: flex; gap: 0.7rem; margin-top: 1.4rem; }
+  .social-btn {
+    width: 36px; height: 36px; border: 1px solid rgba(201,168,76,0.2);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--muted); text-decoration: none;
+    transition: all 0.3s;
+  }
+  .social-btn:hover { border-color: var(--gold); color: var(--gold); }
+  .social-btn svg { width: 16px; height: 16px; }
+  .footer-col h4 {
+    font-family: 'Josefin Sans', sans-serif; font-size: 0.62rem;
+    letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold);
+    margin-bottom: 1.1rem;
+  }
+  .footer-col ul { list-style: none; }
+  .footer-col ul li { margin-bottom: 0.65rem; }
+  .footer-col ul li a {
+    color: var(--muted); text-decoration: none; font-size: 0.92rem; transition: color 0.3s;
+  }
+  .footer-col ul li a:hover { color: var(--cream); }
+  .footer-col address { font-style: italic; color: var(--muted); font-size: 0.92rem; line-height: 1.8; }
+  .footer-col address a { color: var(--gold); text-decoration: none; }
+  .footer-bottom {
+    max-width: 1200px; margin: 3.5rem auto 0;
+    padding-top: 1.8rem; border-top: 1px solid rgba(201,168,76,0.08);
+    display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;
+  }
+  .footer-bottom p {
+    font-family: 'Josefin Sans', sans-serif; font-size: 0.58rem;
+    letter-spacing: 0.2em; text-transform: uppercase; color: rgba(140,107,107,0.55);
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 1024px) {
+    nav { padding: 0.9rem 2rem; }
+    section { padding: 5rem 2.5rem; }
+    .about-section-wrap { padding: 0 2.5rem; }
+    #about { gap: 3.5rem; }
+    .footer-grid { grid-template-columns: 1fr 1fr; gap: 2.5rem; }
+    .footer-brand { grid-column: 1/-1; }
+  }
+  @media (max-width: 900px) {
+    .nav-links { display: none; }
+    .nav-reserve { display: none; }
+    .nav-hamburger { display: flex; }
+    section { padding: 5rem 1.5rem; }
+    .about-section-wrap { padding: 0 1.5rem; }
+    #about { grid-template-columns: 1fr; gap: 3rem; }
+    .about-img-frame { aspect-ratio: 16/9; max-height: 300px; }
+    .about-badge { bottom: -1rem; right: -0.5rem; }
+    #locations { grid-template-columns: 1fr; padding: 0 1.5rem 4rem; }
+    .loc-header { padding: 4rem 1.5rem 2rem; }
+    .gallery-grid { grid-template-columns: 1fr 1fr; grid-template-rows: auto; }
+    .gallery-item:first-child { grid-row: auto; }
+    .gallery-inner { min-height: 200px; }
+    .social-strip { padding: 1.2rem 1.5rem; gap: 1.5rem; }
+    .footer-grid { grid-template-columns: 1fr 1fr; gap: 2rem; }
+    .footer-brand { grid-column: 1/-1; }
+  }
+  @media (max-width: 600px) {
+    nav { padding: 0.8rem 1.2rem; }
+    .nav-logo-text { font-size: 0.9rem; }
+    .nav-logo-img { width: 38px; height: 38px; }
+    section { padding: 4rem 1.2rem; }
+    .hero-logo { width: 110px; height: 110px; }
+    .hero-title { font-size: 2.8rem; }
+    .hero-cta { flex-direction: column; align-items: center; }
+    .reserve-form { grid-template-columns: 1fr; }
+    .gallery-grid { grid-template-columns: 1fr; }
+    .gallery-inner { min-height: 180px; }
+    .footer-grid { grid-template-columns: 1fr; }
+    .footer-bottom { flex-direction: column; text-align: center; gap: 0.5rem; }
+    .menu-tabs { width: 100%; }
+    .menu-tab { flex: 1; text-align: center; font-size: 0.58rem; padding: 0.65rem 0.8rem; }
+    .social-strip { flex-direction: column; gap: 1rem; }
+    .insta-cta { padding: 3rem 1.5rem; }
+    .loc-card { padding: 2.5rem 1.5rem; }
+    .redroom-features { gap: 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="mainNav">
+  <a href="#hero" class="nav-logo-wrap">
+    <img src="logo.png" style="height: 50px; width: 50px;">
+    <div>
+      <span class="nav-logo-text">Scarlett <span>House</span></span>
+      <span class="nav-logo-sub">Bombay</span>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#about">Our Story</a></li>
+    <li><a href="#menu">Menu</a></li>
+    <li><a href="#redroom">Red Room</a></li>
+    <li><a href="#locations">Find Us</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+  </ul>
+  <a href="#reserve" class="nav-reserve">Reserve a Table</a>
+  <button class="nav-hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#about" onclick="closeMobile()">Our Story</a>
+  <a href="#menu" onclick="closeMobile()">Menu</a>
+  <a href="#redroom" onclick="closeMobile()">The Red Room</a>
+  <a href="#locations" onclick="closeMobile()">Find Us</a>
+  <a href="#gallery" onclick="closeMobile()">Gallery</a>
+  <a href="#reserve" class="mob-reserve" onclick="closeMobile()">Reserve a Table</a>
+</div>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-noise"></div>
+  <div class="hero-line"></div>
+  <div class="hero-content">
+   <img src=".\logo.png" class="hero-logo" alt="Scarlett House Logo">
+   <p class="hero-eyebrow">Est. Bandra · Mumbai</p>
+    <h1 class="hero-title">Scarlett<br><em>House</em><br>Bombay</h1>
+    <p class="hero-subtitle">Comfort Food · Wine &amp; Cheese · Artisanal Cocktails</p>
+    <div class="hero-divider"></div>
+    <p class="hero-tagline">A Sanctuary of Flavour in the Heart of Bombay</p>
+    <div class="hero-cta">
+      <a href="#reserve" class="btn-primary">Reserve Your Table</a>
+      <a href="#menu" class="btn-outline">Explore the Menu</a>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <span>Scroll</span>
+    <div class="scroll-arrow">↓</div>
+  </div>
+</section>
+
+<!-- SOCIAL STRIP -->
+<div class="social-strip">
+  <div class="strip-item">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+    <span><strong>31K+</strong> Instagram Followers</span>
+  </div>
+  <div class="strip-item">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+    <span><strong>Two</strong> Locations in Bombay</span>
+  </div>
+  <div class="strip-item">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+    <span>Open <strong>Daily</strong> · 12PM – 1AM</span>
+  </div>
+  <div class="strip-item">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+    <span>Zomato &amp; Dineout <strong>Rated</strong></span>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section style="padding:0;">
+  <div class="about-section-wrap">
+    <div id="about">
+      <div class="about-visual">
+        <div class="about-img-frame">
+          <img src="aboutimgs.png" alt="Scarlett House Interior">
+        </div>
+        <div class="about-badge">
+          <span class="num">31K</span>
+          <span class="lbl">Followers</span>
+        </div>
+      </div>
+      <div class="about-text">
+        <p class="section-label">Our Story</p>
+        <h2 class="section-title">Where Bombay<br>Finds Its <em>Comfort</em></h2>
+        <div class="about-body">
+          <p>Scarlett House Bombay is more than a restaurant — it's a feeling. Tucked in the vibrant lanes of Bandra West, we've crafted a space where the city's energy meets the warmth of home-cooked comfort food.</p>
+          <p>From hand-selected wines and artisanal cheese boards to cocktails shaken with stories, every visit is an experience woven with care, flavour, and the unmistakable soul of Bombay.</p>
+        </div>
+        <div class="about-features">
+          <div class="feat-item">
+            <div class="feat-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#C9A84C" stroke-width="1.5"><path d="M3 2h18v3a6 6 0 01-6 6H9a6 6 0 01-6-6V2z"/><path d="M3 22h18M12 11v11"/></svg>
+            </div>
+            <span class="feat-name">Comfort Food</span>
+          </div>
+          <div class="feat-item">
+            <div class="feat-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#C9A84C" stroke-width="1.5"><path d="M8 22V12a4 4 0 018 0v10M6 22h12M12 2v4M9 5.5L12 2l3 3.5"/></svg>
+            </div>
+            <span class="feat-name">Wine &amp; Cheese</span>
+          </div>
+          <div class="feat-item">
+            <div class="feat-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#C9A84C" stroke-width="1.5"><path d="M8 3H6a2 2 0 00-2 2v14a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2h-2"/><path d="M8 3V1h8v2H8z"/><circle cx="12" cy="13" r="3"/><path d="M12 10V8M12 16v2M9 13H7M17 13h-2"/></svg>
+            </div>
+            <span class="feat-name">Artisanal Cocktails</span>
+          </div>
+          <div class="feat-item">
+            <div class="feat-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#C9A84C" stroke-width="1.5"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+            </div>
+            <span class="feat-name">The Red Room</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MENU -->
+<section id="menu">
+  <div class="menu-header">
+    <p class="section-label">Culinary Offerings</p>
+    <h2 class="section-title">The <em>Menu</em></h2>
+  </div>
+  <div class="menu-tabs">
+    <button class="menu-tab active" onclick="switchTab('food',this)">Food</button>
+    <button class="menu-tab" onclick="switchTab('drinks',this)">Cocktails</button>
+    <button class="menu-tab" onclick="switchTab('wine',this)">Wine &amp; Cheese</button>
+    <button class="menu-tab" onclick="switchTab('mango',this)">Mango Menu</button>
+  </div>
+  <div class="menu-grid" id="menu-grid">
+    <!-- food -->
+    <div class="menu-card" data-tab="food"><div class="menu-card-top"><span class="menu-item-name">Truffle Mushroom Toast</span><span class="menu-price">₹480</span></div><p class="menu-desc">Sourdough, wild mushrooms, black truffle oil, fresh herbs</p><span class="menu-tag">Chef's Pick</span></div>
+    <div class="menu-card" data-tab="food"><div class="menu-card-top"><span class="menu-item-name">Scarlett Cheese Board</span><span class="menu-price">₹950</span></div><p class="menu-desc">Curated selection of artisanal cheeses, house preserves, honeycomb, crackers</p><span class="menu-tag">Share</span></div>
+    <div class="menu-card" data-tab="food"><div class="menu-card-top"><span class="menu-item-name">Braised Short Rib</span><span class="menu-price">₹1,200</span></div><p class="menu-desc">72-hour slow braised, red wine jus, creamy mash, roasted root vegetables</p></div>
+    <div class="menu-card" data-tab="food"><div class="menu-card-top"><span class="menu-item-name">Pasta Cacio e Pepe</span><span class="menu-price">₹650</span></div><p class="menu-desc">House-made tonnarelli, aged pecorino, freshly cracked black pepper</p></div>
+    <div class="menu-card" data-tab="food"><div class="menu-card-top"><span class="menu-item-name">Burrata &amp; Heirloom</span><span class="menu-price">₹720</span></div><p class="menu-desc">Fresh burrata, heirloom tomatoes, basil oil, sea salt flakes</p></div>
+    <div class="menu-card" data-tab="food"><div class="menu-card-top"><span class="menu-item-name">Sticky Toffee Pudding</span><span class="menu-price">₹420</span></div><p class="menu-desc">Warm date pudding, butterscotch sauce, vanilla bean ice cream</p><span class="menu-tag">Must Try</span></div>
+    <!-- drinks -->
+    <div class="menu-card" data-tab="drinks" style="display:none"><div class="menu-card-top"><span class="menu-item-name">Scarlett Negroni</span><span class="menu-price">₹650</span></div><p class="menu-desc">House-infused bitter, sweet vermouth, gin, blood orange twist</p><span class="menu-tag">Signature</span></div>
+    <div class="menu-card" data-tab="drinks" style="display:none"><div class="menu-card-top"><span class="menu-item-name">Bombay Mule</span><span class="menu-price">₹550</span></div><p class="menu-desc">Mumbai gin, ginger beer, fresh lime, cucumber, mint</p></div>
+    <div class="menu-card" data-tab="drinks" style="display:none"><div class="menu-card-top"><span class="menu-item-name">Red Room Old Fashioned</span><span class="menu-price">₹720</span></div><p class="menu-desc">Aged single malt, smoked demerara, bitters, cherry wood smoke</p><span class="menu-tag">Red Room Special</span></div>
+    <div class="menu-card" data-tab="drinks" style="display:none"><div class="menu-card-top"><span class="menu-item-name">Garden Spritz</span><span class="menu-price">₹480</span></div><p class="menu-desc">Aperol, elderflower, sparkling wine, fresh basil, grapefruit</p></div>
+    <!-- wine -->
+    <div class="menu-card" data-tab="wine" style="display:none"><div class="menu-card-top"><span class="menu-item-name">Sula Dindori Reserve Shiraz</span><span class="menu-price">₹550/gl</span></div><p class="menu-desc">Deep ruby, notes of dark berries, pepper, smooth finish</p></div>
+    <div class="menu-card" data-tab="wine" style="display:none"><div class="menu-card-top"><span class="menu-item-name">Grover Zampa Chardonnay</span><span class="menu-price">₹480/gl</span></div><p class="menu-desc">Crisp, tropical notes, lemon zest, fresh oak</p></div>
+    <div class="menu-card" data-tab="wine" style="display:none"><div class="menu-card-top"><span class="menu-item-name">Camembert &amp; Brie</span><span class="menu-price">₹680</span></div><p class="menu-desc">Double crème brie, camembert, fig jam, walnuts, sliced baguette</p></div>
+    <div class="menu-card" data-tab="wine" style="display:none"><div class="menu-card-top"><span class="menu-item-name">Cave-Aged Cheddar</span><span class="menu-price">₹580</span></div><p class="menu-desc">18-month aged cheddar, grain mustard, apple chutney</p></div>
+    <!-- mango -->
+    <div class="menu-card" data-tab="mango" style="display:none"><div class="menu-card-top"><span class="menu-item-name">Alphonso Cheesecake</span><span class="menu-price">₹490</span></div><p class="menu-desc">Creamy New York cheesecake, Alphonso mango compote, mango coulis</p><span class="menu-tag">Seasonal</span></div>
+    <div class="menu-card" data-tab="mango" style="display:none"><div class="menu-card-top"><span class="menu-item-name">Mango Bellini</span><span class="menu-price">₹580</span></div><p class="menu-desc">Fresh Alphonso purée, Prosecco, elderflower, cardamom hint</p><span class="menu-tag">Much Awaited</span></div>
+    <div class="menu-card" data-tab="mango" style="display:none"><div class="menu-card-top"><span class="menu-item-name">Mango Brie Crostini</span><span class="menu-price">₹420</span></div><p class="menu-desc">Toasted sourdough, brie, fresh mango, chilli honey, microgreens</p></div>
+    <div class="menu-card" data-tab="mango" style="display:none"><div class="menu-card-top"><span class="menu-item-name">Raw Mango Margarita</span><span class="menu-price">₹620</span></div><p class="menu-desc">Kairi shrub, tequila, lime, smoked salt rim, chilli thread</p></div>
+  </div>
+</section>
+
+<!-- RED ROOM -->
+<section id="redroom">
+  <div class="redroom-content">
+    <p class="section-label">Private Dining</p>
+    <h2 class="section-title">The <em>Red Room</em></h2>
+    <p class="redroom-body">A hidden chamber of intimacy and indulgence. The Red Room is Scarlett House's exclusive private dining experience — crafted for those who seek something beyond the ordinary. Dim lights, curated cocktails, and an atmosphere that holds your secrets.</p>
+    <div class="redroom-features">
+      <div class="rf-item"><div class="rf-num">12</div><div class="rf-lbl">Max Guests</div></div>
+      <div class="rf-item"><div class="rf-num">3</div><div class="rf-lbl">Course Menus</div></div>
+      <div class="rf-item"><div class="rf-num">Open</div><div class="rf-lbl">Now</div></div>
+    </div>
+    <a href="#reserve" class="btn-primary">Enquire About the Red Room</a>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery">
+  <div class="gallery-header">
+    <p class="section-label">Visual Stories</p>
+    <h2 class="section-title">Taste With Your <em>Eyes</em></h2>
+  </div>
+  <div class="gallery-grid">
+    <div class="gallery-item">
+      <img src="gallerymorning.png" alt="Scarlett House Interior">
+      <div class="gallery-inner" style="background:linear-gradient(135deg,#3A1A0A,#1A0A0A)"><span class="gallery-emoji">🥐</span></div>
+      <div class="gallery-overlay"><span class="gallery-cap">The morning light at Scarlett House</span></div>
+    </div>
+    <div class="gallery-item">
+      <img src="gallerycoktail.png" alt="Cheese Board">
+      <div class="gallery-inner" style="background:linear-gradient(135deg,#2A0A0A,#4A1A1A)"><span class="gallery-emoji">🍸</span></div>
+      <div class="gallery-overlay"><span class="gallery-cap">Artisanal cocktails, shaken with stories</span></div>
+    </div>
+    <div class="gallery-item">
+      <img src="cheese.png" alt="Cheese Board" >
+      <div class="gallery-inner" style="background:linear-gradient(135deg,#1A1A0A,#2A1A0A)"><span class="gallery-emoji">🧀</span></div>
+      <div class="gallery-overlay"><span class="gallery-cap">Curated cheese boards</span></div>
+    </div>
+    <div class="gallery-item">
+      <img src="aboutimg.png" alt="Red Room Interior" style="object-fit: fill;">
+      <div class="gallery-inner" style="background:linear-gradient(135deg,#0A1A1A,#1A2A2A)"><span class="gallery-emoji">🍷</span></div>
+      <div class="gallery-overlay"><span class="gallery-cap">An evening in the Red Room</span></div>
+    </div>
+    <div class="gallery-item">
+      <img src="mangomenu.png" alt="Dessert">
+      <div class="gallery-inner" style="background:linear-gradient(135deg,#2A1A2A,#1A0A1A)"><span class="gallery-emoji">🥭</span></div>
+      <div class="gallery-overlay"><span class="gallery-cap">The much-awaited Mango Menu</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- INSTAGRAM CTA -->
+<div class="insta-cta">
+  <p>Follow our story, daily specials &amp; behind-the-scenes moments</p>
+  <a href="https://instagram.com/scarletthousebombay" target="_blank" class="insta-btn">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+    @scarletthousebombay
+  </a>
+</div>
+
+<!-- LOCATIONS -->
+<div class="loc-section">
+  <div class="loc-header">
+    <p class="section-label">Where to Find Us</p>
+    <h2 class="section-title">Two <em>Homes</em> in Bombay</h2>
+  </div>
+  <div id="locations">
+    <div class="loc-card">
+      <div class="loc-number">01</div>
+      <div class="loc-area">Bandra West</div>
+      <a href="tel:7400099990" class="loc-phone">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.7 13.4a19.79 19.79 0 01-3.07-8.67A2 2 0 012.68 2.5h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 10.1a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+        7400099990
+      </a>
+      <address class="loc-address">
+        Red Bungalow, 3, Pali Road,<br> 
+        opposite Yellow Rose Building,<br>
+        Pali Village, Bandra West,<br>
+        Mumbai, Maharashtra 400050
+      </address>
+      <div class="loc-hours">
+        <div class="loc-hours-label">Hours</div>
+        <div class="loc-hours-time">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          Mon – Sun · 12 PM – 1 AM
+        </div>
+      </div>
+      <a href="https://maps.google.com/?q=Scarlett+House+Bandra+West+Mumbai" target="_blank" class="loc-map-link">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        Get Directions
+      </a>
+    </div>
+    <div class="loc-card">
+      <div class="loc-number">02</div>
+      <div class="loc-area">Juhu</div>
+      <a href="tel:7900099997" class="loc-phone">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.7 13.4a19.79 19.79 0 01-3.07-8.67A2 2 0 012.68 2.5h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 10.1a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+        7900099997
+      </a>
+      <address class="loc-address">Juhu, Mumbai<br>Maharashtra</address>
+      <div class="loc-hours">
+        <div class="loc-hours-label">Hours</div>
+        <div class="loc-hours-time">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          Mon – Sun · 12 PM – 1 AM
+        </div>
+      </div>
+      <a href="https://maps.google.com/?q=Scarlett+House+Juhu+Mumbai" target="_blank" class="loc-map-link">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        Get Directions
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- RESERVE -->
+<section id="reserve">
+  <div class="reserve-inner">
+    <p class="section-label">Book a Table</p>
+    <h2 class="section-title">Make a <em>Reservation</em></h2>
+    <p class="reserve-body">For intimate dinners, celebrations, or an impromptu evening of good food and better company — we're ready for you.</p>
+    <div class="reserve-form">
+      <div class="form-group"><label>First Name</label><input type="text" placeholder="Your name"></div>
+      <div class="form-group"><label>Phone / Email</label><input type="text" placeholder="Contact details"></div>
+      <div class="form-group">
+        <label>Location</label>
+        <select><option value="">Select location</option><option>Bandra West</option><option>Juhu</option><option>The Red Room</option></select>
+      </div>
+      <div class="form-group">
+        <label>Guests</label>
+        <select><option>2 Guests</option><option>3–4 Guests</option><option>5–6 Guests</option><option>7+ Guests</option></select>
+      </div>
+      <div class="form-group"><label>Date</label><input type="date"></div>
+      <div class="form-group">
+        <label>Time</label>
+        <select><option>12:30 PM</option><option>1:30 PM</option><option>7:00 PM</option><option>7:30 PM</option><option>8:00 PM</option><option>8:30 PM</option><option>9:00 PM</option><option>9:30 PM</option><option>10:00 PM</option></select>
+      </div>
+      <div class="form-group full"><label>Special Requests</label><textarea placeholder="Celebrations, dietary preferences, seating preferences…"></textarea></div>
+      <div class="form-submit"><button type="button">Confirm Reservation</button></div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <img src="logo.png" alt="Scarlett House Logo" class="footer-logo" style="height: 50px; width: 50px; border-radius: 50%;">
+      <span class="footer-brand-name">Scarlett <span>House</span> Bombay</span>
+      <p>A sanctuary of comfort food, wine, cheese &amp; artisanal cocktails in the heart of Bombay. DM us on Instagram for reservations.</p>
+      <div class="footer-social">
+        <a href="https://instagram.com/scarletthousebombay" target="_blank" class="social-btn" aria-label="Instagram">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+        </a>
+        <a href="tel:7400099990" class="social-btn" aria-label="Call Bandra">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.7 13.4a19.79 19.79 0 01-3.07-8.67A2 2 0 012.68 2.5h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 10.1a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+        </a>
+        <a href="https://maps.google.com/?q=Scarlett+House+Bandra" target="_blank" class="social-btn" aria-label="Location">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        </a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Explore</h4>
+      <ul>
+        <li><a href="#about">Our Story</a></li>
+        <li><a href="#menu">Menu</a></li>
+        <li><a href="#redroom">The Red Room</a></li>
+        <li><a href="#gallery">Gallery</a></li>
+        <li><a href="#reserve">Reservations</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Bandra West</h4>
+      <address>
+        Red Bungalow, 3 Pali Rd,<br>Pali Village,<br>Bandra West,<br>Mumbai 400050<br><br>
+        <a href="tel:7400099990">7400099990</a>
+      </address>
+    </div>
+    <div class="footer-col">
+      <h4>Juhu</h4>
+      <address>
+        Juhu, Mumbai<br>Maharashtra<br><br>
+        <a href="tel:7900099997">7900099997</a>
+      </address>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 Scarlett House Bombay. All rights reserved.</p>
+    <p>Comfort Food · Wine &amp; Cheese · Artisanal Cocktails</p>
+  </div>
+</footer>
+
+<script>
+  // Hamburger
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('open');
+    mobileMenu.classList.toggle('open');
+  });
+  function closeMobile() {
+    hamburger.classList.remove('open');
+    mobileMenu.classList.remove('open');
+  }
+
+  // Menu tabs
+  function switchTab(tab, btn) {
+    document.querySelectorAll('.menu-tab').forEach(t => t.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('.menu-card').forEach(card => {
+      card.style.display = card.dataset.tab === tab ? 'block' : 'none';
+    });
+  }
+
+  // Scroll fade-in
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.opacity = '1';
+        e.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.menu-card, .feat-item, .loc-card, .rf-item, .strip-item').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(18px)';
+    el.style.transition = 'opacity 0.55s ease, transform 0.55s ease';
+    observer.observe(el);
+  });
+</script>
+</body>
+</html>
